@@ -1,21 +1,18 @@
-package com.code.post.model;
+package com.code.MyCodeBlog.model;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="TB_POST")
 public class Post {
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String autor;
 
     @NotNull
@@ -25,16 +22,7 @@ public class Post {
     @Lob
     private String texto;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate data;
-
-    public Post (Long id, String autor, String titulo, String texto, LocalDate data) {
-        this.id = id;
-        setAutor(autor);
-        setTitulo(titulo);
-        setTexto(texto);
-        setData(data);
-    }
 
     public String getAutor() {
         return autor;
