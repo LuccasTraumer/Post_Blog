@@ -20,7 +20,7 @@ public class ServiceImplement implements MyBlogService {
     }
 
     @Override
-    public Post getPost(Long id) {
+    public Post getPost(String id) {
         return myRepository.findById(id).get();
     }
 

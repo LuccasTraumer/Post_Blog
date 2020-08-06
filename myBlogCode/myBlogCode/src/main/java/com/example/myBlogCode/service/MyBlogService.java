@@ -7,6 +7,6 @@ import java.util.List;
 public interface MyBlogService {
 
     List<Post> getAllPosts();
-    Post getPost(Long id);
+    Post getPost(String id);
     Post save(Post p);
 }

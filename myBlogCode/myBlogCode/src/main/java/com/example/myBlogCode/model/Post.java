@@ -1,16 +1,18 @@
 package com.example.myBlogCode.model;
 
 import com.sun.istack.internal.NotNull;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Document("PostP")
+@Data
+@Document
 public class Post {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotNull
     private String autor;
@@ -21,7 +23,7 @@ public class Post {
 
     private LocalDate data;
 
-    public Post(Long id, String autor, String titulo, String texto, LocalDate data) {
+    public Post(String id, String autor, String titulo, String texto, LocalDate data) {
         this.id = id;
         this.autor = autor;
         this.titulo = titulo;
@@ -29,11 +31,11 @@ public class Post {
         this.data = data;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
