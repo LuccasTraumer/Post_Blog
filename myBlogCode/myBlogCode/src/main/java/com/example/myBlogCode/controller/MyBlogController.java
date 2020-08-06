@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/post")
 public class MyBlogController {
@@ -26,20 +27,44 @@ public class MyBlogController {
             return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<Post> getById(@RequestParam String id) {
+        if (myService.getPost(id) != null) {
+            return ResponseEntity.ok(myService.getPost(id));
+        } else {
+          return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Post add (@RequestBody Post post) {
-        System.out.println(post);
-        return myService.save(post);
+    public ResponseEntity<Post> add (@RequestBody Post post) {
+        if (myService.getPost(post.getId()) == null ) {
+            return ResponseEntity.ok(myService.save(post));
+        } else {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @DeleteMapping("")
-    public void delete(@RequestBody Post post) {
-        myService.delete(post);
+    public void delete(@RequestParam String id) {
+        if (myService.getPost(id) != null ){
+            Post postToDeleted = myService.getPost(id);
+            myService.delete(postToDeleted);
+            if (myService.getPost(postToDeleted.getId()) == null) {
+                 ResponseEntity.ok().build();
+            }
+        } else {
+            ResponseEntity.badRequest();
+        }
     }
 
     @PutMapping("")
-    public Post putPost(@RequestBody Post post) {
-        return myService.putPost(post);
+    public ResponseEntity<Post> putPost(@RequestBody Post post) {
+        if (myService.getPost(post.getId()) != null ) {
+            return ResponseEntity.ok(myService.putPost(post));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
