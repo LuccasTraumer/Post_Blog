@@ -32,4 +32,14 @@ public class MyBlogController {
         System.out.println(post);
         return myService.save(post);
     }
+
+    @DeleteMapping("")
+    public void delete(@RequestBody Post post) {
+        myService.delete(post);
+    }
+
+    @PutMapping("")
+    public Post putPost(@RequestBody Post post) {
+        return myService.putPost(post);
+    }
 }

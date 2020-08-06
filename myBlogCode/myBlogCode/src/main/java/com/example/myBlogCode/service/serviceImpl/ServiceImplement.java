@@ -28,4 +28,18 @@ public class ServiceImplement implements MyBlogService {
     public Post save(Post p) {
         return myRepository.save(p);
     }
+
+    @Override
+    public void delete(Post post) {
+        myRepository.delete(post);
+    }
+
+    @Override
+    public Post putPost(Post post) {
+        if (myRepository.existsById(post.getId())) {
+            save(post);
+            return post;
+        }
+        return null;
+    }
 }
