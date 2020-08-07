@@ -28,18 +28,31 @@ public class MyBlogController {
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Post add (@RequestBody Post post) {
-        System.out.println(post);
-        return myService.save(post);
+    public ResponseEntity<Post> add (@RequestBody Post post) {
+        if (myService.getPost(post.getId()) != null ){
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(myService.save(post));
+        }
     }
 
     @DeleteMapping("")
     public void delete(@RequestBody Post post) {
-        myService.delete(post);
+        if (myService.getPost(post.getId()) != null) {
+            myService.delete(post);
+            ResponseEntity.ok();
+        }
+        else {
+            ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("")
-    public Post putPost(@RequestBody Post post) {
-        return myService.putPost(post);
+    public ResponseEntity<Post> putPost(@RequestBody Post post) {
+        if(myService.getPost(post.getId()) != null) {
+            return ResponseEntity.ok(myService.putPost(post));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
