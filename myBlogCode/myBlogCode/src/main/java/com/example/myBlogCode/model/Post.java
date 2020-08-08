@@ -23,6 +23,7 @@ public class Post {
 
     private LocalDate data;
 
+    public Post() { }
     public Post(String id, String autor, String titulo, String texto, LocalDate data) {
         this.id = id;
         this.autor = autor;
