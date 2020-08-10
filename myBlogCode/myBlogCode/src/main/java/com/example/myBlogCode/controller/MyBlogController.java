@@ -4,10 +4,12 @@ import com.example.myBlogCode.model.Post;
 import com.example.myBlogCode.service.MyBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class MyBlogController {
@@ -27,9 +29,10 @@ public class MyBlogController {
     }
 
     @PostMapping("/post")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Post addPost (@RequestBody Post newPost) {
-        return myService.save(newPost);
+     public ResponseEntity<Post> addPost (@RequestBody Post newPost) {
+        if(newPost != null)
+            System.out.println(newPost);
+        return ResponseEntity.ok(myService.save(newPost));
     }
 
     @DeleteMapping("/post")
