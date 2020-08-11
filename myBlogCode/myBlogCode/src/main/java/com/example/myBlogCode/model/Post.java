@@ -74,6 +74,9 @@ public class Post {
         this.data = data;
     }
 
+    public void setData() {
+        this.data = LocalDate.now();
+    }
     @Override
     public String toString() {
         return "Post{" +

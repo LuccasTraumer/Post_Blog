@@ -30,8 +30,10 @@ public class MyBlogController {
 
     @PostMapping("/post")
      public ResponseEntity<Post> addPost (@RequestBody Post newPost) {
-        if(newPost != null)
-            System.out.println(newPost);
+        newPost.setData();
+        if(newPost == null || newPost.getAutor() == null || newPost.getTitulo() == null){
+            return ResponseEntity.status(406).build();
+        }
         return ResponseEntity.ok(myService.save(newPost));
     }
 
