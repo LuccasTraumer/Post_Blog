@@ -34,7 +34,8 @@ export class AddPostComponent implements OnInit {
 
   savePost(autor: string, titulo: string, texto: string): void {
     this.post = new Post(autor, titulo, texto);
-    this.service.savePost(this.post).subscribe(() => {});
+    this.service.salvarPost(this.post).subscribe(() => {});
+    this.service.pegarTodosPosts();
   }
 
 }
