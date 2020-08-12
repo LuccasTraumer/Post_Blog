@@ -1,7 +1,8 @@
 <div class="btn-add-car">
     <button type="button" class="btn btn-primary" routerLink="post/addPost">Add post</button>
+    <input type="text" #box class="btn btn-primary" (keyup.enter)="buscarPorId(box.value)" (blur)="buscarPorId(box.value)" placeholder="Buscar por id"/>
+    <p>{{value}}</p>
 </div>
-
 <div class="card-body">
     <table class="table">
         <thead>

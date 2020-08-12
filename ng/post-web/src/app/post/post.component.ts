@@ -14,6 +14,8 @@ export class PostComponent implements OnInit, OnChanges {
   post = {} as Post;
   posts: Post[];
 
+  value = '';
+
   constructor(private service: ConsumeApiService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.service.pegarTodosPosts();
@@ -23,11 +25,20 @@ export class PostComponent implements OnInit, OnChanges {
     this.getPosts();
    }
 
-   
   getPosts() {
     this.service.pegarTodosPosts().subscribe((posts: Post[]) => {
       this.posts = posts;
     });
+  }
+
+  buscarPorId(value: string) {
+    if (value === '' || value === undefined) {
+      this.value = ' ';
+    }
+    else{
+      this.value = value;
+      this.service.pegarPostPorId(value);
+    }
   }
 
   editPost(post: Post) {
