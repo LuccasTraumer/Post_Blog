@@ -37,10 +37,10 @@ public class MyBlogController {
         return ResponseEntity.ok(myService.save(newPost));
     }
 
-    @DeleteMapping("/post")
+    @DeleteMapping("/post{id}")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public void deletePost (@RequestBody Post newPost) {
-        myService.delete(newPost);
+    public void deletePost (@RequestParam String id) {
+        myService.delete(id);
     }
 
     @PutMapping("/post")

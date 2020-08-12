@@ -30,7 +30,8 @@ public class ServiceImplement implements MyBlogService {
     }
 
     @Override
-    public void delete(Post post) {
+    public void delete (String id) {
+        Post post = this.getPost(id);
         myRepository.delete(post);
     }
 
