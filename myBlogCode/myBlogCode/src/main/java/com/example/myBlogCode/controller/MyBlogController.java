@@ -46,5 +46,6 @@ public class MyBlogController {
     @PutMapping("/post")
     public Post putPost(@RequestBody Post newPost) {
         return myService.putPost(newPost);
+
     }
 }
