@@ -20,7 +20,7 @@
             <td>{{post.titulo}}</td>
             <td>{{post.texto}}</td>
             <td>{{post.data}}</td>
-            <td><button type="button" (click)="editPost(post)" class="btn btn-warning" routerLink="post/addPost">EDITAR</button></td><app-add-post hidden [putPost]="post"></app-add-post>
+            <td><button type="button" (click)="editPost(post)" class="btn btn-warning" routerLink="post/addPost">EDITAR</button></td>
             <td><button type="button" (click)="deletarPost(post.id)" class="btn btn-danger">DELETAR</button></td>
           </tr>
         </tbody>

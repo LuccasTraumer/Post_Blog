@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddPostComponent } from './add-post/add-post.component';
+import { ModalEditPostComponent } from './modal-edit-post/modal-edit-post.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     ErrorComponent,
     HeaderComponent,
     AddPostComponent,
+    ModalEditPostComponent,
   ],
   imports: [
     BrowserModule,

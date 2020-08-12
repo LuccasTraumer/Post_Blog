@@ -14,12 +14,12 @@ export class AddPostComponent implements OnInit {
   post = {} as Post;
   posts: Post[];
 
-  @Input()
   putPost: Post;
 
   constructor(private service: ConsumeApiService) { }
 
   ngOnInit(): void {
+    console.log(this.putPost);
   }
 
   buttonClicked($event) {
@@ -39,4 +39,7 @@ export class AddPostComponent implements OnInit {
     this.service.pegarTodosPosts();
   }
 
+  getPutPost(post: Post) {
+    console.log(post);
+  }
 }
