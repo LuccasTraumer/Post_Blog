@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.LocalDate;
 
 @Data
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 public class Post {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String id;
 
     @NotNull
@@ -23,12 +26,12 @@ public class Post {
 
     private LocalDate data;
 
-    public Post(String id, String autor, String titulo, String texto, LocalDate data) {
-        this.id = id;
+    public Post() { }
+    public Post(String id, String autor, String titulo, String texto, String data) {
         this.autor = autor;
         this.titulo = titulo;
         this.texto = texto;
-        this.data = data;
+        this.data = LocalDate.now();
     }
 
     public String getId() {
@@ -71,6 +74,9 @@ public class Post {
         this.data = data;
     }
 
+    public void setData() {
+        this.data = LocalDate.now();
+    }
     @Override
     public String toString() {
         return "Post{" +

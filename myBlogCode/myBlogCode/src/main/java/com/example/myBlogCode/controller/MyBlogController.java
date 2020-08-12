@@ -11,60 +11,41 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/")
 public class MyBlogController {
 
     @Autowired
     MyBlogService myService;
 
 
-    @GetMapping("")
-    public ResponseEntity<List<Post>> getPosts() {
-        List<Post> posts = myService.getAllPosts();
-        if (posts != null)
-            return ResponseEntity.ok(posts);
-        else
-            return ResponseEntity.notFound().build();
+    @GetMapping("/posts")
+    public List<Post> getPosts() {
+        return myService.getAllPosts();
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<Post> getById(@RequestParam String id) {
-        if (myService.getPost(id) != null) {
-            return ResponseEntity.ok(myService.getPost(id));
-        } else {
-          return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/post{id}")
+    public Post getById(@RequestParam String id) {
+        return myService.getPost(id);
     }
 
-    @PostMapping("")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<Post> add (@RequestBody Post post) {
-        if (myService.getPost(post.getId()) == null ) {
-            return ResponseEntity.ok(myService.save(post));
-        } else {
-            return ResponseEntity.status(500).build();
+    @PostMapping("/post")
+     public ResponseEntity<Post> addPost (@RequestBody Post newPost) {
+        newPost.setData();
+        if(newPost == null || newPost.getAutor() == null || newPost.getTitulo() == null){
+            return ResponseEntity.status(406).build();
         }
+        return ResponseEntity.ok(myService.save(newPost));
     }
 
-    @DeleteMapping("")
-    public void delete(@RequestParam String id) {
-        if (myService.getPost(id) != null ){
-            Post postToDeleted = myService.getPost(id);
-            myService.delete(postToDeleted);
-            if (myService.getPost(postToDeleted.getId()) == null) {
-                 ResponseEntity.ok().build();
-            }
-        } else {
-            ResponseEntity.badRequest();
-        }
+    @DeleteMapping("/post")
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    public void deletePost (@RequestBody Post newPost) {
+        myService.delete(newPost);
     }
 
-    @PutMapping("")
-    public ResponseEntity<Post> putPost(@RequestBody Post post) {
-        if (myService.getPost(post.getId()) != null ) {
-            return ResponseEntity.ok(myService.putPost(post));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("/post")
+    public Post putPost(@RequestBody Post newPost) {
+        return myService.putPost(newPost);
+
     }
 }
