@@ -47,11 +47,8 @@ export class ConsumeApiService {
   }
 
   // deleta um Post
-  deletarPost(post: Post) {
-    return this.httpClient.delete<Post>(this.baseURL + '/post' + post.id, this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError));
+  deletarPost(id: string): Observable<void> {
+    return this.httpClient.delete<void>(environment.baseURL + '/post?id=' + id);
   }
 
 

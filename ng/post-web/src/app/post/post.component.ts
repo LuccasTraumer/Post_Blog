@@ -46,8 +46,8 @@ export class PostComponent implements OnInit, OnChanges {
     console.log('Edita Post');
   }
 
-  deletarPost(post: Post) {
-    this.service.deletarPost(post).subscribe(() => {});
+  deletarPost(id: string) {
+    this.service.deletarPost(id).subscribe(() => {});
     console.log('Deleta Post');
     this.getPosts();
   }

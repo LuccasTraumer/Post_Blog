@@ -1,6 +1,6 @@
 import { ConsumeApiService } from './../consume-api-service/consume-api.service';
 import { Post } from './../models/post';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { $ } from 'protractor';
 
@@ -14,7 +14,8 @@ export class AddPostComponent implements OnInit {
   post = {} as Post;
   posts: Post[];
 
-  
+  @Input()
+  putPost: Post;
 
   constructor(private service: ConsumeApiService) { }
 
