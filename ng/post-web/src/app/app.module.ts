@@ -5,25 +5,30 @@ import { HomeComponent } from './home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddPostComponent } from './add-post/add-post.component';
-import { ModalEditPostComponent } from './modal-edit-post/modal-edit-post.component';
+
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: HomeComponent,
     pathMatch: 'full'
   },
   {
-    path:'post',
+    path: 'post',
     component: PostComponent
   },
   {
-    path:'post/addPost',
+    path: 'post/addPost',
+    component: AddPostComponent,
+  },
+  {
+    path: 'post/addPost/:id',
     component: AddPostComponent,
   },
   {
@@ -39,13 +44,12 @@ const routes: Routes = [
     ErrorComponent,
     HeaderComponent,
     AddPostComponent,
-    ModalEditPostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
 
   ],
   providers: [],

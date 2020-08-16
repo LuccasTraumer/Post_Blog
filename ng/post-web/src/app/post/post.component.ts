@@ -1,9 +1,12 @@
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, from } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { ConsumeApiService } from './../consume-api-service/consume-api.service';
 import { Post } from '../models/post';
+import { environment } from 'src/environments/environment.dev';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -13,6 +16,8 @@ export class PostComponent implements OnInit, OnChanges {
 
   post = {} as Post;
   posts: Post[];
+  router: Router;
+
 
   value = '';
 
@@ -31,13 +36,20 @@ export class PostComponent implements OnInit, OnChanges {
     });
   }
 
+  enviaDados(post: Post) {
+    this.router.navigate(['/addPost'])
+      .then(sucess => console.log('navigation sucess', sucess))
+      .catch(console.error);
+  }
+
   buscarPorId(value: string) {
+    console.log(value);
     if (value === '' || value === undefined) {
       this.value = ' ';
     }
     else{
       this.value = value;
-      this.service.pegarPostPorId(value);
+      this.service.pegarPostPorId(value).subscribe(() => {});
     }
   }
 

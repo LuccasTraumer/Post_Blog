@@ -31,8 +31,8 @@ export class ConsumeApiService {
         catchError(this.handleError));
   }
 
-  pegarPostPorId(id = '1255879'): Observable<Post> {
-    return this.httpClient.get<Post>(this.baseURL + `post?id=1255879`)
+  pegarPostPorId(id): Observable<Post> {
+    return this.httpClient.get<Post>(this.baseURL + `post?id=` + id)
       .pipe(
         retry(2),
         catchError(this.handleError));

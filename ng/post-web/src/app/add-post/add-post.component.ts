@@ -11,6 +11,9 @@ import { $ } from 'protractor';
 })
 export class AddPostComponent implements OnInit {
 
+  @Input()
+  editPost: Post;
+
   post = {} as Post;
   posts: Post[];
 
@@ -18,9 +21,7 @@ export class AddPostComponent implements OnInit {
 
   constructor(private service: ConsumeApiService) { }
 
-  ngOnInit(): void {
-    console.log(this.putPost);
-  }
+  ngOnInit(): void { }
 
   buttonClicked($event) {
     const autor = (<HTMLInputElement>document.getElementById('txtAutor')).value;
@@ -33,6 +34,11 @@ export class AddPostComponent implements OnInit {
     }
   }
 
+  hasEditPost(): boolean {
+    console.log(this.editPost);
+    return this.editPost !== undefined;
+  }
+
   savePost(autor: string, titulo: string, texto: string): void {
     this.post = new Post(autor, titulo, texto);
     this.service.salvarPost(this.post).subscribe(() => {});
@@ -40,6 +46,6 @@ export class AddPostComponent implements OnInit {
   }
 
   getPutPost(post: Post) {
-    console.log(post);
+    console.log('Get Put Post: ' + post);
   }
 }
