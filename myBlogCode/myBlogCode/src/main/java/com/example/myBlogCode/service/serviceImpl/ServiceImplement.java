@@ -4,6 +4,7 @@ import com.example.myBlogCode.model.Post;
 import com.example.myBlogCode.repository.MyCodeBlogRepository;
 import com.example.myBlogCode.service.MyBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,18 +22,28 @@ public class ServiceImplement implements MyBlogService {
 
     @Override
     public Post getPost(String id) {
-        return myRepository.findById(id).get();
+        if (id != null || id.isEmpty()) {
+            return myRepository.findById(id).get();
+        }
+        return null;
     }
 
     @Override
-    public Post save(Post p) {
-        return myRepository.save(p);
+    public Post save(Post newPost) {
+        newPost.setData();
+        if(newPost == null || newPost.getAutor() == null || newPost.getTitulo() == null) {
+            return null;
+        }
+        return myRepository.save(newPost);
     }
 
     @Override
-    public void delete (String id) {
-        Post post = this.getPost(id);
-        myRepository.delete(post);
+    public Post delete (String id) {
+        Post post = null;
+        if (id != null && !id.isEmpty()) {
+            post = this.getPost(id);
+        }
+        return post;
     }
 
     @Override

@@ -9,6 +9,6 @@ public interface MyBlogService {
     List<Post> getAllPosts();
     Post getPost(String id);
     Post save(Post post);
-    void delete (String id);
+    Post delete (String id);
     Post putPost(Post post);
 }
