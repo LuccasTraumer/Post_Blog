@@ -12,11 +12,10 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class ConsumeApiService {
 
+  private editPost: Post;
   private baseURL = environment.baseURL;
 
   private httpOptions;
-
-
 
   constructor(private httpClient: HttpClient) {
     this.httpOptions = {
@@ -66,4 +65,11 @@ export class ConsumeApiService {
     return throwError(errorMessage);
   }
 
+  storeToEdit(post: Post) {
+    this.editPost = post;
+  }
+
+  getEditPost() {
+    return this.editPost;
+  }
 }

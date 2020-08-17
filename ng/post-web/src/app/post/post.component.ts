@@ -16,8 +16,6 @@ export class PostComponent implements OnInit, OnChanges {
 
   post = {} as Post;
   posts: Post[];
-  router: Router;
-
 
   value = '';
 
@@ -36,12 +34,6 @@ export class PostComponent implements OnInit, OnChanges {
     });
   }
 
-  enviaDados(post: Post) {
-    this.router.navigate(['/addPost'])
-      .then(sucess => console.log('navigation sucess', sucess))
-      .catch(console.error);
-  }
-
   buscarPorId(value: string) {
     console.log(value);
     if (value === '' || value === undefined) {
@@ -56,6 +48,7 @@ export class PostComponent implements OnInit, OnChanges {
   editPost(post: Post) {
     this.service.editarPost(post);
     console.log('Edita Post');
+    this.service.storeToEdit(post);
   }
 
   deletarPost(id: string) {

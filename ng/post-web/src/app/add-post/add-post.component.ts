@@ -1,6 +1,6 @@
 import { ConsumeApiService } from './../consume-api-service/consume-api.service';
 import { Post } from './../models/post';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { $ } from 'protractor';
 
@@ -9,9 +9,8 @@ import { $ } from 'protractor';
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.scss']
 })
-export class AddPostComponent implements OnInit {
+export class AddPostComponent implements OnInit, AfterViewInit {
 
-  @Input()
   editPost: Post;
 
   post = {} as Post;
@@ -20,6 +19,10 @@ export class AddPostComponent implements OnInit {
   putPost: Post;
 
   constructor(private service: ConsumeApiService) { }
+
+  ngAfterViewInit(): void {
+    this.hasEditPost();
+  }
 
   ngOnInit(): void { }
 
@@ -34,9 +37,24 @@ export class AddPostComponent implements OnInit {
     }
   }
 
-  hasEditPost(): boolean {
-    console.log(this.editPost);
-    return this.editPost !== undefined;
+  editarPost(post: Post) {
+    this.service.editarPost(post);
+    return;
+  }
+
+  hasEditPost() {
+    const post = this.service.getEditPost();
+    if (post !== undefined) {
+      console.log(post.autor);
+      const autor = (<HTMLInputElement>document.getElementById('txtAutor'));
+      const titulo = (<HTMLInputElement>document.getElementById('txtTitulo'));
+      const texto = (<HTMLInputElement>document.getElementById('txtTexto'));
+      autor.setAttribute('value', post.autor);
+      titulo.setAttribute('value', post.titulo);
+      texto.value = post.texto;
+      return true;
+    }
+    return false;
   }
 
   savePost(autor: string, titulo: string, texto: string): void {
