@@ -42,8 +42,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     return;
   }
 
-  hasEditPost() {
+  hasEditPost(): boolean {
     const post = this.service.getEditPost();
+    let temEditPost = false;
     if (post !== undefined) {
       console.log(post.autor);
       const autor = (<HTMLInputElement>document.getElementById('txtAutor'));
@@ -52,9 +53,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       autor.setAttribute('value', post.autor);
       titulo.setAttribute('value', post.titulo);
       texto.value = post.texto;
-      return true;
+      temEditPost = true;
+      return temEditPost;
     }
-    return false;
+    return temEditPost;
   }
 
   savePost(autor: string, titulo: string, texto: string): void {

@@ -16,6 +16,10 @@
       <label for="exampleFormControlTextarea1">Texto</label>
       <textarea class="form-control" id="txtTexto" type="text" rows="3" placeholder="Escreva seu Texto aqui"></textarea>
     </div>
-    <button type="button" class="btn btn-primary" routerLink="/" id="btn-save" (click)="buttonClicked($event)">Salvar</button>
-    <button type="button" class="btn btn-primary" routerLink="/" id="btn-edit" hidden="hasEditPost()" (click)="editarPost($event)">Editar</button>
+    <div class="btnSalvar" *ngIf="hasEditPost() === false">
+      <button type="button" class="btn btn-primary" routerLink="/" id="btn-save" (click)="buttonClicked($event)" >Salvar</button>
+    </div>
+    <div class="btnEditar" *ngIf="hasEditPost() === true">
+      <button type="button" class="btn btn-primary" routerLink="/" id="btn-edit"  (click)="editarPost($event)">Editar</button>
+    </div>
   </form>
