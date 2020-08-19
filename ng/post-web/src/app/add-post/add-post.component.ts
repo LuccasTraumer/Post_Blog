@@ -60,7 +60,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       postEditado.texto = this.texto;
 
     }
-    this.service.editarPost(postEditado);
+    this.service.editarPost(postEditado).subscribe(() => {});
   }
 
   validaCamposInput(): boolean {

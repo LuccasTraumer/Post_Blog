@@ -42,7 +42,7 @@ export class ConsumeApiService {
   }
 
   editarPost(postRequest: Post): Observable<Post> {
-    console.log('Cheguei no SRV: ' + postRequest.texto);
+    console.log('Cheguei no SRV: ' + environment.baseURL + 'post' + 'vou enviar o:' + postRequest.id);
     return this.httpClient.put<Post>(environment.baseURL + 'post', postRequest);
   }
 
