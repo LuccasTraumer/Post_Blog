@@ -18,6 +18,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   putPost: Post;
 
+
+  autor;
+  titulo;
+  texto;
+
   constructor(private service: ConsumeApiService) { }
 
   ngAfterViewInit(): void {
@@ -27,11 +32,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
 
   buttonClicked($event) {
-    const autor = (<HTMLInputElement>document.getElementById('txtAutor')).value;
-    const titulo = (<HTMLInputElement>document.getElementById('txtTitulo')).value;
-    const texto = (<HTMLInputElement>document.getElementById('txtTexto')).value;
-    if (autor !== undefined || titulo !== undefined || texto !== undefined) {
-      this.savePost(autor, titulo, texto);
+    this.autor = (<HTMLInputElement>document.getElementById('txtAutor')).value;
+    this.titulo = (<HTMLInputElement>document.getElementById('txtTitulo')).value;
+    this.texto = (<HTMLInputElement>document.getElementById('txtTexto')).value;
+    if (this.validaCamposInput()) {
+      this.savePost(this.autor, this.titulo, this.texto);
     } else {
       window.alert('Algum campos está vazio!');
     }
@@ -39,24 +44,30 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   editarPost($event) {
     let newPost: Post;
+    let postEditado: Post;
     if (this.hasEditPost) {
       newPost = this.service.getEditPost();
     }
-    console.log(newPost.id);
-    const autor = (<HTMLInputElement>document.getElementById('txtAutor')).value;
-    const titulo = (<HTMLInputElement>document.getElementById('txtTitulo')).value;
-    const texto = (<HTMLInputElement>document.getElementById('txtTexto')).value;
+    this.autor = (<HTMLInputElement>document.getElementById('txtAutor')).value;
+    this.titulo = (<HTMLInputElement>document.getElementById('txtTitulo')).value;
+    this.texto = (<HTMLInputElement>document.getElementById('txtTexto')).value;
 
-    if (autor !== undefined || titulo !== undefined || texto !== undefined) {
-      newPost.setAutor(newPost, autor);
-      newPost.setTitulo(newPost, titulo);
-      newPost.setTexto(newPost, texto);
-      
-      console.log(newPost.id);
+    if (this.validaCamposInput()) {
+      postEditado = newPost;
+      postEditado.id = newPost.id;
+      postEditado.autor = this.autor;
+      postEditado.titulo = this.titulo;
+      postEditado.texto = this.texto;
+
     }
-    console.log(newPost.id);
-    this.service.editarPost(newPost);
-    return;
+    this.service.editarPost(postEditado);
+  }
+
+  validaCamposInput(): boolean {
+    if (this.autor !== undefined || this.titulo !== undefined || this.texto !== undefined) {
+      return true;
+    }
+    return false;
   }
 
   hasEditPost(): boolean {

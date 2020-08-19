@@ -10,16 +10,4 @@ export class Post {
         this.titulo = titulo;
         this.texto = texto;
     }
-
-    setAutor(post: Post, novoAutor): void {
-        post.autor = novoAutor;
-    }
-
-    setTitulo(post: Post, novoTitulo): void {
-        post.titulo = novoTitulo;
-    }
-
-    setTexto(post: Post, novoTexto): void {
-        post.texto = novoTexto;
-    }
 }
