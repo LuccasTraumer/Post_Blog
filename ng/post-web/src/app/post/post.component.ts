@@ -54,5 +54,6 @@ export class PostComponent implements OnInit, OnChanges {
 
   deletarPost(id: string) {
     this.service.deletarPost(id).subscribe(() => {});
+    this.service.pegarTodosPosts().subscribe(() => {});
   }
 }

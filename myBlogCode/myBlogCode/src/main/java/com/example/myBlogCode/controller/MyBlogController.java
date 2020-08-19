@@ -51,7 +51,6 @@ public class MyBlogController {
     }
 
     @DeleteMapping("/post{id}")
-    @ResponseStatus(code = HttpStatus.ACCEPTED)
     public ResponseEntity<Post> deletePost (@RequestParam String id) {
         Post response = myService.delete(id);
         if (response != null) {
