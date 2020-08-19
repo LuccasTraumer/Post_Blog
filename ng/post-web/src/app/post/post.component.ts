@@ -21,12 +21,13 @@ export class PostComponent implements OnInit, OnChanges {
 
   constructor(private service: ConsumeApiService) { }
   ngOnChanges(changes: SimpleChanges): void {
-    this.getPosts();
+    if (!this.service.teveAtualizacaoLista()){
+      this.getPosts();
+    }
   }
 
   ngOnInit(): void {
     this.getPosts();
-    this.service.attHome;
    }
 
   getPosts() {
@@ -53,7 +54,5 @@ export class PostComponent implements OnInit, OnChanges {
 
   deletarPost(id: string) {
     this.service.deletarPost(id).subscribe(() => {});
-    console.log('Deleta Post');
-    this.getPosts();
   }
 }

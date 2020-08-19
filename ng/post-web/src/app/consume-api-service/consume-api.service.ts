@@ -15,7 +15,7 @@ export class ConsumeApiService {
   private editPost: Post;
   private baseURL = environment.baseURL;
 
-  attHome = false;
+  private attListaPosts = false;
 
   private httpOptions;
 
@@ -25,38 +25,48 @@ export class ConsumeApiService {
       };
   }
 
-  pegarTodosPosts(): Observable<Post[]> {
+  public teveAtualizacaoLista(): boolean {
+    return this.attListaPosts;
+  }
+
+  public pegarTodosPosts(): Observable<Post[]> {
     return this.httpClient.get<Post[]>(this.baseURL + 'posts')
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-  pegarPostPorId(id): Observable<Post> {
+  public pegarPostPorId(id): Observable<Post> {
     return this.httpClient.get<Post>(this.baseURL + `post?id=` + id)
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-  salvarPost(postRequest: Post): Observable<Post> {
-    this.attHome = true;
+  public salvarPost(postRequest: Post): Observable<Post> {
+    this.attListaPosts = true;
     return this.httpClient.post<Post>(environment.baseURL + 'post', postRequest);
   }
 
-  editarPost(postRequest: Post): Observable<Post> {
-    this.attHome = true;
-    return this.httpClient.put<Post>(environment.baseURL + 'post', postRequest);
-  }
-
-  // deleta um Post
-  deletarPost(id: string): Observable<void> {
-    this.attHome = true;
+  public deletarPost(id: string): Observable<void> {
+    this.attListaPosts = true;
     return this.httpClient.delete<void>(environment.baseURL + '/post?id=' + id);
   }
 
+  public editarPost(postRequest: Post): Observable<Post> {
+    this.attListaPosts = true;
+    return this.httpClient.put<Post>(environment.baseURL + 'post', postRequest);
+  }
 
-  handleError(error: HttpErrorResponse) {
+  public storeToEdit(post: Post) {
+    this.editPost = post;
+  }
+
+  public  getEditPost() {
+    return this.editPost;
+  }
+
+  private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
@@ -70,11 +80,4 @@ export class ConsumeApiService {
     return throwError(errorMessage);
   }
 
-  storeToEdit(post: Post) {
-    this.editPost = post;
-  }
-
-  getEditPost() {
-    return this.editPost;
-  }
 }
