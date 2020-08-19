@@ -43,6 +43,10 @@ public class ServiceImplement implements MyBlogService {
         if (id != null && !id.isEmpty()) {
             post = this.getPost(id);
         }
+        if (post != null) {
+            myRepository.delete(post);
+            return post;
+        }
         return post;
     }
 
