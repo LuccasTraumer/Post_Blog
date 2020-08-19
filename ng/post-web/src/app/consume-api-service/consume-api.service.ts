@@ -15,6 +15,8 @@ export class ConsumeApiService {
   private editPost: Post;
   private baseURL = environment.baseURL;
 
+  attHome = false;
+
   private httpOptions;
 
   constructor(private httpClient: HttpClient) {
@@ -38,16 +40,18 @@ export class ConsumeApiService {
   }
 
   salvarPost(postRequest: Post): Observable<Post> {
+    this.attHome = true;
     return this.httpClient.post<Post>(environment.baseURL + 'post', postRequest);
   }
 
   editarPost(postRequest: Post): Observable<Post> {
-    console.log('Cheguei no SRV: ' + environment.baseURL + 'post' + 'vou enviar o:' + postRequest.id);
+    this.attHome = true;
     return this.httpClient.put<Post>(environment.baseURL + 'post', postRequest);
   }
 
   // deleta um Post
   deletarPost(id: string): Observable<void> {
+    this.attHome = true;
     return this.httpClient.delete<void>(environment.baseURL + '/post?id=' + id);
   }
 

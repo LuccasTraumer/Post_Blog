@@ -21,11 +21,12 @@ export class PostComponent implements OnInit, OnChanges {
 
   constructor(private service: ConsumeApiService) { }
   ngOnChanges(changes: SimpleChanges): void {
-    this.service.pegarTodosPosts();
+    this.getPosts();
   }
 
   ngOnInit(): void {
     this.getPosts();
+    this.service.attHome;
    }
 
   getPosts() {
@@ -47,7 +48,6 @@ export class PostComponent implements OnInit, OnChanges {
 
   editPost(post: Post) {
     this.service.editarPost(post);
-    console.log('Edita Post');
     this.service.storeToEdit(post);
   }
 
