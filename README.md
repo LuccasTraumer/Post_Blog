@@ -17,3 +17,6 @@ DTO (Data Transfer Object) of Post use annotation @Document and has 4 atribute a
 
 Databa used is MongoDB beacause is very simple and easy to use, simple to see all data and to make a CRUD is very simple too.
 
+# Images:
+
+![Screen Home|width=36px|height=36px](https://github.com/LuccasTraumer/learning_both/blob/master/imgs_ex/page_home.png)
