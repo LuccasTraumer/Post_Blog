@@ -21,3 +21,9 @@ Databa used is MongoDB beacause is very simple and easy to use, simple to see al
 ### Home Screen
 <kbd>![Screen Home|width=36px|height=36px](https://github.com/LuccasTraumer/learning_both/blob/master/imgs_ex/page_home.png)</kbd>
 
+### Add Post
+<kbd>![Screen Home|width=36px|height=36px](https://raw.githubusercontent.com/LuccasTraumer/learning_both/master/imgs_ex/page_save.png?token=AD5NGI2OP4MMON7SBYAFGRS7I6GGW)</kbd>
+
+### Edit Post
+<kbd>![Screen Home|width=36px|height=36px](https://raw.githubusercontent.com/LuccasTraumer/learning_both/master/imgs_ex/page_edit.png?token=AD5NGI4SMTCBDFI2MSO54NC7I6GGY)</kbd>
+
