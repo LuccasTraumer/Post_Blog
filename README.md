@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/luccastraumer/post_blog)
+
 # Post Blog
 
 Post Blog is a project in Angular and Spring boot where you can make Post in this website, this project is very important to me because I put most part a have learning on last 6 mouth in my interning, this is not evrything i learning but make this project make me put a hands on code and make mistakes and learnig with this mistakes.
